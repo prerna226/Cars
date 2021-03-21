@@ -12,10 +12,10 @@ CREATE OR REPLACE FUNCTION public.get_car_detail(
 
 AS $BODY$
 
-select concat(cb.name,' ',cm.name,' ',cv.name) from car_brand cb 
-inner join car_detail cd on cb.id = cd.brand_id
-left join car_model cm on cb.id = cd.model_id
-left join car_varient cv on cv.id = cd.varient_id
+SELECT concat(cb.name,' ',cm.name,' ',cv.name) FROM car_brand cb 
+INNER JOIN car_detail cd ON cb.id = cd.brand_id
+LEFT JOIN car_model cm ON cb.id = cd.model_id
+LEFT JOIN car_varient cv ON cv.id = cd.varient_id
 
 WHERE concat(cb.name,' ',cm.name,' ',cv.name) ILIKE '%' || searchKeyword || '%' LIMIT pageLimit OFFSET pageNumber
 $BODY$;
